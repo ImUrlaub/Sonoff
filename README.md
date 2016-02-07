@@ -1,5 +1,5 @@
 # Sonoff
-Alternative firmware based on the Arduino port of the ESP8266
+Alternative firmware for the itead Sonoff based on the Arduino port for the ESP8266
 
 # Settings for the Arduino IDE
 
