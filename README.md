@@ -16,6 +16,8 @@ Also be aware that OTA is not support with that little flash. Tried it but it wi
 
 Here the working setting for the Arduino ESP8622 2.0 IDE
 
+![Board settings](BoardSettings.png)
+
 # Helpfull Links
 * http://www.esp8266.com/wiki/doku.php?id=esp8266_gpio_pin_allocations
 * http://wiki.iteadstudio.com/images/6/6b/Sonoff_schmatic.pdf
