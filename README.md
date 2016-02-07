@@ -1,7 +1,16 @@
 # Sonoff
 Alternative firmware for the itead Sonoff based on the Arduino port for the ESP8266
 
-# Settings for the Arduino IDE
+## Features
+### Common
+#### Relay control with eco mode to reduce power consumption
+Relays need less current one they are fully switched on. PWM is used here to reduce the current after a period of time which is needed to turn the relay on. If you experience switching off of the relay if it should stay on the reduction parameter has to be increased. please see Sonoff.h and relay.h for further info.
+
+**If you have pets at home** please be aware that they might hear the PWM frequnecy of currently 25kHz. Please set the reduction paramter to 1.0, which switches off the eco mode but will keep your pets at peace. 
+#### Switch reading with debouncing and events
+### Sonoff Webserver
+*Control the relay through the webpage found under http://sonoff.local
+## Settings for the Arduino IDE
 
 First I had a strange behavior:
 * Serial working 
@@ -18,7 +27,7 @@ Here the working setting for the Arduino ESP8622 2.0 IDE
 
 ![Board settings](BoardSettings.png)
 
-# Helpfull links
+## Helpfull links
 * https://github.com/esp8266/Arduino
 * http://www.esp8266.com/wiki/doku.php?id=esp8266_gpio_pin_allocations
 * http://wiki.iteadstudio.com/images/6/6b/Sonoff_schmatic.pdf
