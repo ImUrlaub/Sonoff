@@ -17,7 +17,7 @@ class Sonoff
    
 
   public:
-    Relay relay = Relay( RELAY, 0.4, 500, 10000);
+    Relay relay = Relay( RELAY, 0.4, 500, 25000);
     Switch sw =  Switch( SWITCH, 2, 5);
 
     Sonoff(void) {
