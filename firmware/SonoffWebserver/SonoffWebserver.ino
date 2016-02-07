@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, Majenko Technologies
+ * Copyright (c) 2016 ImUrlaub
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification,
@@ -36,32 +36,13 @@
 #include "Sonoff.h"
 
 const char *ssid = "ssid";
-const char *password = "password";
+const char *password = "pass";
 
 ESP8266WebServer server ( 80 );
 
-Relay relay(RELAY,0.3,500);
-Switch sw;
+Sonoff sonoff;
 
 const int led = LED;
-
-void drawGraph() {
-  String out = "";
-  char temp[100];
-  out += "<svg xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\" width=\"400\" height=\"150\">\n";
-  out += "<rect width=\"400\" height=\"150\" fill=\"rgb(250, 230, 210)\" stroke-width=\"1\" stroke=\"rgb(0, 0, 0)\" />\n";
-  out += "<g stroke=\"black\">\n";
-  int y = rand() % 130;
-  for (int x = 10; x < 390; x+= 10) {
-    int y2 = rand() % 130;
-    sprintf(temp, "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" stroke-width=\"1\" />\n", x, 140 - y, x + 10, 140 - y2);
-    out += temp;
-    y = y2;
-  }
-  out += "</g>\n</svg>\n";
-
-  server.send ( 200, "image/svg+xml", out);
-}
 
 void handleRoot() {
   
@@ -70,24 +51,43 @@ void handleRoot() {
   int min = sec / 60;
   int hr = min / 60;
 
+
+  for ( uint8_t i = 0; i < server.args(); i++ ) {
+    if(server.argName(i) == String("relay")){
+      if(server.arg(i) == String("on")){
+        sonoff.relay.on();
+        digitalWrite ( led, 0 );  
+      }
+      else if(server.arg(i) == String("off")){
+        sonoff.relay.off();
+        digitalWrite ( led, 1 );
+      }
+    }
+  }
+  char *r;
+  if(sonoff.relay.isOn()) r = "on"; 
+  else r = "off"; 
+
   snprintf ( temp, 400,
 
 "<html>\
   <head>\
     <meta http-equiv='refresh' content='5'/>\
-    <title>ESP8266 Demo</title>\
+    <title>Sonoff Demo</title>\
     <style>\
       body { background-color: #cccccc; font-family: Arial, Helvetica, Sans-Serif; Color: #000088; }\
     </style>\
   </head>\
   <body>\
-    <h1>Hello from ESP8266!</h1>\
+    <h1>Hello from Sonoff!</h1>\
     <p>Uptime: %02d:%02d:%02d</p>\
-    <img src=\"/test.svg\" />\
+    <p>Relay: %s</p>\
+    <a href=\"/?relay=on\">Relay on</a><br>\
+    <a href=\"/?relay=off\">Relay off</a><br>\
   </body>\
 </html>",
 
-    hr, min % 60, sec % 60
+    hr, min % 60, sec % 60, r
   );
   server.send ( 200, "text/html", temp );
 }
@@ -128,28 +128,24 @@ void setup ( void ) {
   Serial.print ( "IP address: " );
   Serial.println ( WiFi.localIP() );
 
-  if ( MDNS.begin ( "esp8266" ) ) {
+  if ( MDNS.begin ( "Sonoff" ) ) {
     Serial.println ( "MDNS responder started" );
   }
 
   server.on ( "/", handleRoot );
-  server.on ( "/test.svg", drawGraph );
   server.on ( "/on", []() {
-    relay.on();
+    sonoff.relay.on();
     digitalWrite ( led, 0 );
-    server.send ( 200, "text/plain", "Relay on" );
+    server.send ( 200, "text/plain", "on" );
   } );
   server.on ( "/off", []() {
-    relay.off();
+    sonoff.relay.off();
     digitalWrite ( led, 1 );
-    server.send ( 200, "text/plain", "Relay off" );
+    server.send ( 200, "text/plain", "off" );
   } );
   server.on ( "/state", []() {
-    if(relay.isOn()) server.send ( 200, "text/plain", "Relay on" );
-    else server.send ( 200, "text/plain", "Relay off" );
-  } );
-  server.on ( "/inline", []() {
-    server.send ( 200, "text/plain", "this works as well" );
+    if(sonoff.relay.isOn()) server.send ( 200, "text/plain", "on" );
+    else server.send ( 200, "text/plain", "off" );
   } );
   server.onNotFound ( handleNotFound );
   server.begin();
@@ -158,15 +154,14 @@ void setup ( void ) {
 
 void loop ( void ) {
   server.handleClient();
-  relay.loop();
-  sw.loop();
-  if(sw.getEvent() == SWITCH_EVENT_ON){
-    if(relay.isOn()){
-      relay.off();
+  sonoff.loop();
+  if(sonoff.sw.getEvent() == SWITCH_EVENT_ON){
+    if(sonoff.relay.isOn()){
+      sonoff.relay.off();
       digitalWrite ( led, 1 );
     }
     else {
-      relay.on();
+      sonoff.relay.on();
       digitalWrite ( led, 0 );
     }
   }
