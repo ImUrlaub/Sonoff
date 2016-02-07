@@ -18,7 +18,7 @@ Here the working setting for the Arduino ESP8622 2.0 IDE
 
 ![Board settings](BoardSettings.png)
 
-# Helpfull Links
+# Helpfull links
 * https://github.com/esp8266/Arduino
 * http://www.esp8266.com/wiki/doku.php?id=esp8266_gpio_pin_allocations
 * http://wiki.iteadstudio.com/images/6/6b/Sonoff_schmatic.pdf
