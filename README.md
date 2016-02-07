@@ -9,7 +9,7 @@ Relays need less current one they are fully switched on. PWM is used here to red
 **If you have pets at home** please be aware that they might hear the PWM frequnecy of currently 25kHz. Please set the reduction paramter to 1.0, which switches off the eco mode but will keep your pets at peace. 
 #### Switch reading with debouncing and events
 ### Sonoff Webserver
-*Control the relay through the webpage found under http://sonoff.local
+* Control the relay through the webpage found under http://sonoff.local
 ## Settings for the Arduino IDE
 
 First I had a strange behavior:
