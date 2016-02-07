@@ -12,7 +12,7 @@ Thanks to Leonzio who posted here http://tech.scargill.net/itead-slampher-and-so
 
 Flash size to set for a generic module in the Arduino IDE is 512k for the V1.0 hardware. Even if the chip says 1M bit.
 
-Also be aware that OTA is not support with that little flash. Tried it but it will now advertise itself and never shows up in the list of OTA devices.
+Also be aware that OTA is not support with that little flash. Tried it but it will **not** advertise itself and never shows up in the list of OTA devices.
 
 Here the working setting for the Arduino ESP8622 2.0 IDE
 
