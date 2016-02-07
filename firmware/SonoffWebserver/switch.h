@@ -1,7 +1,6 @@
 #ifndef switch_h
 #define switch_h
 
-
 static const uint8_t SWITCH_EVENT_IDLE = 1;
 static const uint8_t SWITCH_EVENT_OFF = 1;
 static const uint8_t SWITCH_EVENT_ON = 2;

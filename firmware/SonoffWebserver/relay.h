@@ -3,7 +3,6 @@
 
 class Relay
 {
-
   private:
 
     unsigned long time_to_reduce_current;
