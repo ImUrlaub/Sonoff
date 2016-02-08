@@ -33,3 +33,5 @@ Here the working setting for the Arduino ESP8622 2.0 IDE
 * http://www.esp8266.com/wiki/doku.php?id=esp8266_gpio_pin_allocations
 * http://wiki.iteadstudio.com/images/6/6b/Sonoff_schmatic.pdf
 * http://www.john-lassen.de/index.php/projects/esp-8266-arduino-ide-webconfig
+* https://github.com/bblanchon/ArduinoJson
+* https://github.com/knolleary/pubsubclient
