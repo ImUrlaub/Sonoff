@@ -10,6 +10,7 @@ Relays need less current one they are fully switched on. PWM is used here to red
 #### Switch reading with debouncing and events
 ### Sonoff Webserver
 * Control the relay through the webpage found under http://sonoff.local
+
 ## Settings for the Arduino IDE
 
 First I had a strange behavior:
@@ -31,3 +32,4 @@ Here the working setting for the Arduino ESP8622 2.0 IDE
 * https://github.com/esp8266/Arduino
 * http://www.esp8266.com/wiki/doku.php?id=esp8266_gpio_pin_allocations
 * http://wiki.iteadstudio.com/images/6/6b/Sonoff_schmatic.pdf
+* http://www.john-lassen.de/index.php/projects/esp-8266-arduino-ide-webconfig
