@@ -159,10 +159,12 @@ void loop ( void ) {
     if(sonoff.relay.isOn()){
       sonoff.relay.off();
       digitalWrite ( led, 1 );
+      delay(700); // debounce
     }
     else {
       sonoff.relay.on();
       digitalWrite ( led, 0 );
+      delay(700); // debounce
     }
   }
 }
